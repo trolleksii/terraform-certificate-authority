@@ -19,7 +19,7 @@ module "ca" {
 locals {
   client = [for i in range(length(var.client_cert_subjects)) : {
     name = replace(var.client_cert_subjects[i]["common_name"], "*", "all")
-    cert = module.ca.client_cert[i],
+    cert = module.ca.client_certs[i],
     pkey = module.ca.client_private_key[i]
   }]
 }
