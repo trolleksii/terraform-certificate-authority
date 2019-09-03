@@ -7,7 +7,7 @@ To create a new CA, create variables file with subject description:
 ```RUBY
 create_ca       = true
 ca_cert_subject = {
-    common_name         = "example.com"
+    common_name         = "My Org Root CA"
     organization        = "My org"
     organizational_unit = "Org department"
     street_address      = ["1 Dundas str"]
@@ -15,15 +15,16 @@ ca_cert_subject = {
     province            = "ON"
     country             = "CA"
     postal_code         = "111-222"
-    serial_number       = null
+    serial_number       = 1000
 }
 ```
 
-you can also add optional `client_cert_subjects` variable with a list of subjects for certificates issue:
+add one or more subjects for the sertificates you want to issue into `client_cert_subjects` variable:
 
 ```RUBY
 client_cert_subjects = [{
   common_name         = "website.local"
+  alternative_names   = ["website.local","www.website.local"]
   organization        = "My org"
   organizational_unit = "Org unit"
   street_address      = ["Some address"]
@@ -31,10 +32,11 @@ client_cert_subjects = [{
   province            = "ON"
   country             = "CA"
   postal_code         = "112-221"
-  serial_number       = null
+  serial_number       = 1001
 },
 {
   common_name         = "localhost"
+  alternative_names   = ["localhost"]
   organization        = "My org"
   organizational_unit = "Org unit"
   street_address      = ["Some address"]
@@ -42,7 +44,7 @@ client_cert_subjects = [{
   province            = "ON"
   country             = "CA"
   postal_code         = "112-221"
-  serial_number       = null
+  serial_number       = 1002
 }]
 ```
 
@@ -64,6 +66,8 @@ ca_pkey_file = "ca.key"
 There are number of additional options you can set, please refer to the *variables.tf* file for complete list.
 
 ## Run it
+
+Obviously you will need [terraform](https://www.terraform.io/downloads.html) binary to run this script. The minimum version needed is 0.12.0.
 
 Assuming that variables are in *main.tfvars* file
 

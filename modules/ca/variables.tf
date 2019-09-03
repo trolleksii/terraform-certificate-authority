@@ -59,19 +59,7 @@ variable "ca_cert_early_renewal_hours" {
 }
 
 variable "ca_cert_subject" {
-  type        = object({
-    common_name         = string
-    organization        = string
-    organizational_unit = string
-    street_address      = list(string)
-    locality            = string
-    province            = string
-    country             = string
-    postal_code         = string
-    serial_number       = string
-  })
   description = "The subject for which a certificate is being requested."
-  default     = null
 }
 
 variable "client_key_ecdsa_curve" {
@@ -81,9 +69,7 @@ variable "client_key_ecdsa_curve" {
 }
 
 variable "client_cert_subjects" {
-  type        = list
   description = "The subject for which a certificate is being requested."
-  default     = []
 }
 
 variable "client_cert_validity_period" {
